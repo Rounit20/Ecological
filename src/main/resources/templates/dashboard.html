@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <title>Ecopeddling App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding-top: 70px; /* To avoid content being hidden behind the navbar */
+            background-color: #f8f8f8;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #3C940B; /* Custom background color */
+            padding: 10px 20px;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: white !important;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: white !important;
+            margin-right: 15px;
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: black !important;
+        }
+
+        .dashboard {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 2.5em;
+            margin-bottom: 0.2em;
+        }
+
+        h2 {
+            color: #535353;
+            font-size: 1.5em;
+            margin-bottom: 1em;
+        }
+
+        .waste-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            width: 350px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .card img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+            display: block;
+            margin: 0 auto; /* This will center the image horizontally */
+        }
+
+        .card h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card p {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .plastic {
+            background-color: #fde4e4;
+        }
+
+        .paper {
+            background-color: #fef3d1;
+        }
+
+        .glass {
+            background-color: #e7f8e8;
+        }
+
+        .metal {
+            background-color: #eceaff;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: rgb(0, 128, 0);
+            color: white;
+            border: 0;
+            padding: 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: rgb(18, 67, 6);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+		<img th:src="@{/images/LOGO.png}" alt="LOGO" style="width: 40px; height: auto; margin-right: 10px;">
+        <a class="navbar-brand" href="#">ECOPEDDLING</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="wasteDataform">Submit an item</a>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/auction}">Sell</a>
+				</li>
+				<li class="nav-item">
+					 <a class="nav-link" th:href="@{/events}">Events</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/Register}">Register</a>
+				</li>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        <h1>Dashboard</h1>
+        <h2>Waste Recycled By Us</h2>
+        <div class="waste-cards">
+            <div class="card plastic">
+                <img th:src="@{/images/Plastic.png}" alt="Plastic Icon">
+                <h3>Plastic</h3>
+                <p th:text="${totalPlastic} + ' Tons'">__ Tons</p>
+            </div>
+            <div class="card paper">
+                <img th:src="@{/images/Paper.png}" alt="Paper Icon">
+                <h3>Paper</h3>
+                <p th:text="${totalPaper} + ' Tons'">__ Tons</p>
+            </div>
+            <div class="card glass">
+                <img th:src="@{/images/Glass.png}" alt="Glass Icon">
+                <h3>Glass</h3>
+                <p th:text="${totalGlass} + ' Tons'">__ Tons</p>
+            </div>
+            <div class="card metal">
+                <img th:src="@{/images/Metal.png}" alt="Metal Icon">
+                <h3>Metal</h3>
+                <p th:text="${totalMetal} + ' Tons'">__ Tons</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <a th:href="@{/wasteDataform}">
+            <button type="button">
+                UPDATE
+            </button>
+        </a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Auctions</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <style>
+        .auction-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .bid-form {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Active Auctions</h1>
+        
+        <!-- Active Auctions List -->
+        <div id="activeAuctions">
+            <div th:each="auction : ${activeAuctions}" class="auction-item">
+                <h4 th:text="${auction.name}">Product Name</h4>
+                <p>Description: <span th:text="${auction.description}">Product Description</span></p>
+                <p>Quantity: <span th:text="${auction.quantity}">Quantity in Tons</span> Tons</p>
+                <p>Starting Price: $<span th:text="${auction.startingPrice}">Starting Price</span></p>
+                <p>Ending Date: <span th:text="${#dates.format(auction.endDate, 'yyyy-MM-dd\'T\'HH:mm')}">Auction End Date</span></p>
+                
+                <!-- Bid Form -->
+                <div class="bid-form">
+                    <h5>Place a Bid</h5>
+                    <form th:action="@{/placeBid}" method="post">
+                        <input type="hidden" name="productId" th:value="${auction.id}">
+                        <div class="form-group">
+                            <label for="bidAmount">Bid Amount ($):</label>
+                            <input type="number" class="form-control" id="bidAmount" name="bidAmount" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit Bid</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</body>
+</html>

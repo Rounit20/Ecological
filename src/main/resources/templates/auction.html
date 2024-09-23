@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <title>Data Input For Dashboard - Ecopeddling</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        h2 {
+            color: #3C940B;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            background-color: #ffffff;
+        }
+
+        th {
+            background-color: #3C940B;
+            color: white;
+            text-align: left;
+            padding: 10px 15px;
+        }
+
+        td {
+            padding: 15px;
+            vertical-align: middle;
+        }
+
+        label {
+            font-weight: bold;
+            color: #3C940B;
+        }
+
+        input.form-control {
+            width: 60%;
+            border: 1px solid #3C940B;
+        }
+
+        button.btn-primary {
+            background-color: #3C940B;
+            border-color: #3C940B;
+        }
+
+        button.btn-primary:hover {
+            background-color: #34790a;
+            border-color: #34790a;
+        }
+
+        .navbar {
+            margin-bottom: 20px;
+            background-color: #3C940B;
+            padding: 10px 20px;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: white !important;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: white !important;
+            margin-right: 15px;
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: black !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+		<img th:src="@{/images/LOGO.png}" alt="LOGO" style="width: 40px; height: auto; margin-right: 10px;">
+        <a class="navbar-brand" href="#">ECOPEDDLING</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/dashboard}">Dashboard</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/wasteDataform}">Submit an item</a>
+                </li>
+				<li class="nav-item">
+				    <a class="nav-link" th:href="@{/auction}">Sell</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/events}">Events</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/Register}">Register</a>
+				</li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <form action="#" method="post" th:action="@{/auction}" th:object="${auction}">
+            <h2 class="mt-4">Please Enter the Data for your Item</h2>
+            <hr/>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Items</th>
+                        <th scope="col">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+					<tr>
+					    <td><label for="name" class="col-form-label">Contact Name</label></td>
+					    <td>
+					 	 	<input th:field="*{name}" type="text" class="form-control" placeholder="Mandatory">
+					        <span class="text-danger" th:errors="*{name}"></span>
+					 	</td>
+					</tr>
+					<tr>
+					  <td><label for="phone_no" class="col-form-label">Contact Number</label></td>
+					  <td>
+					      	<input th:field="*{phone_no}" type="text" class="form-control" placeholder="Mandatory">
+					        <span class="text-danger" th:errors="*{phone_no}"></span>
+					  </td>
+					  </tr>
+                    <tr>
+                        <td><label for="product_name" class="col-form-label">Product Name</label></td>
+                        <td>
+                            <input th:field="*{product_name}" type="text" class="form-control" placeholder="Mandatory">
+                            <span class="text-danger" th:errors="*{product_name}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="description" class="col-form-label">Description</label></td>
+                        <td>
+                            <input th:field="*{description}" type="text" class="form-control" placeholder="Mandatory">
+                            <span class="text-danger" th:errors="*{description}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="quantity" class="col-form-label">Quantity(Tons)</label></td>
+                        <td>
+                            <input th:field="*{quantity}" type="text" class="form-control" placeholder="Mandatory">
+                            <span class="text-danger" th:errors="*{quantity}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="price" class="col-form-label">Starting Price($)</label></td>
+                        <td>
+                            <input th:field="*{price}" type="text" class="form-control" placeholder="Mandatory">
+                            <span class="text-danger" th:errors="*{price}"></span>
+                        </td>
+                    </tr>
+				
+                    
+                    
+                </tbody>
+            </table>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <input type="hidden" th:field="*{id}" />
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</body>
+</html>

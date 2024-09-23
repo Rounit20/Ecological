@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Bid - Ecopeddling Auction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <style>
+        .bid-section {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .bid-section h3 {
+            margin-bottom: 20px;
+        }
+
+        .bid-section label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Place Your Bid</h1>
+
+        <div class="bid-section">
+            <h3>Submit Your Bid for <span th:text="${waste.name}">Item Name</span></h3>
+
+            <form action="#" method="post" th:action="@{/placeBid}">
+                <div class="form-group">
+                    <label for="productName">Product Name:</label>
+                    <input type="text" class="form-control" id="productName" name="productName" th:value="${waste.name}" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="currentBid">Current Bid ($):</label>
+                    <input type="number" class="form-control" id="currentBid" name="currentBid" th:value="${waste.currentBid}" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="bidAmount">Your Bid Amount ($):</label>
+                    <input type="number" class="form-control" id="bidAmount" name="bidAmount" required>
+                </div>
+
+                <input type="hidden" name="wasteId" th:value="${waste.id}">
+
+                <button type="submit" class="btn btn-success">Submit Bid</button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</body>
+</html>
